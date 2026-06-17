@@ -193,10 +193,15 @@ jobs:
           path: target
       - name: Release to Maven Central
         run: |
-          echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --import
+          mkdir -p ~/.gnupg
+          chmod 700 ~/.gnupg
+          echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
+          gpgconf --kill gpg-agent || true
+          echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --batch --yes --pinentry-mode loopback --import
           python3 ./script/release.py
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           SONATYPE_BEARER_TOKEN: ${{ secrets.SONATYPE_BEARER_TOKEN }}
       - name: Delete useless jars
         run: |

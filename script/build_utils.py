@@ -306,7 +306,11 @@ def collect_jars(group, name, version, jars, target_dir):
     asc_file = file_path + '.asc'
     if os.path.exists(asc_file):
       os.remove(asc_file)
-    subprocess.check_call(['gpg', '--quiet', '--detach-sign', '--armor', file_path])
+    gpg_args = ['gpg', '--batch', '--yes', '--quiet', '--pinentry-mode', 'loopback']
+    passphrase = os.getenv('GPG_PASSPHRASE')
+    if passphrase is not None:
+      gpg_args += ['--passphrase', passphrase]
+    subprocess.check_call(gpg_args + ['--detach-sign', '--armor', file_path])
     print(f"  GPG  {basename}")
 
     # MD5
