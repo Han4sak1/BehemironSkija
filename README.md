@@ -1,4 +1,4 @@
-# Skija: Java bindings for Skia
+# Behemiron Skija: Java bindings for Skia
 
 **Skia** is an open source 2D graphics library which provides common APIs that work across a variety of hardware and software platforms.
 
@@ -6,7 +6,7 @@
 
 ![](extras/logo.png)
 
-> Note: this is an active and supported branch of what was previously hosted at [JetBrains/Skija](https://github.com/JetBrains/Skija). JetBrains/Skija is no longer updated.
+> Note: this is the Behemiron-maintained branch of what was previously hosted at [JetBrains/Skija](https://github.com/JetBrains/Skija). JetBrains/Skija is no longer updated.
 
 ## Motivation: Why Skija?
 
@@ -165,7 +165,7 @@ Maven:
 ```xml
 <dependencies>
   <dependency>
-    <groupId>io.github.humbleui</groupId>
+    <groupId>com.behemiron.engine</groupId>
     <artifactId>${artifact}</artifactId>
     <version>${version}</version>
   </dependency>
@@ -176,7 +176,7 @@ Gradle:
 
 ```gradle
 dependencies {
-  implementation("io.github.humbleui:${artifact}:${version}")
+  implementation("com.behemiron.engine:${artifact}:${version}")
 }
 ```
 
@@ -184,13 +184,13 @@ Replace `${artifact}` and `${version}` with:
 
 | Platform      | `${artifact}`       | `${version}`                                                                                                                                                |
 |---------------|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Windows (x64) | `skija-windows-x64` | [![](https://img.shields.io/maven-central/v/io.github.humbleui/skija-windows-x64)](https://mvnrepository.com/artifact/io.github.humbleui/skija-windows-x64) |
-| Linux (x64)   | `skija-linux-x64`   | [![](https://img.shields.io/maven-central/v/io.github.humbleui/skija-linux-x64)](https://mvnrepository.com/artifact/io.github.humbleui/skija-linux-x64)     |
-| Linux (arm64)   | `skija-linux-arm64`   | [![](https://img.shields.io/maven-central/v/io.github.humbleui/skija-linux-arm64)](https://mvnrepository.com/artifact/io.github.humbleui/skija-linux-arm64)     |
-| macOS (x64)   | `skija-macos-x64`   | [![](https://img.shields.io/maven-central/v/io.github.humbleui/skija-macos-x64)](https://mvnrepository.com/artifact/io.github.humbleui/skija-macos-x64)     |
-| macOS (arm64) | `skija-macos-arm64` | [![](https://img.shields.io/maven-central/v/io.github.humbleui/skija-macos-arm64)](https://mvnrepository.com/artifact/io.github.humbleui/skija-macos-arm64) |
-| Android (x64)   | `skija-android-x64`   | [![](https://img.shields.io/maven-central/v/io.github.humbleui/skija-android-x64)](https://mvnrepository.com/artifact/io.github.humbleui/skija-android-x64)     |
-| Android (arm64) | `skija-android-arm64` | [![](https://img.shields.io/maven-central/v/io.github.humbleui/skija-android-arm64)](https://mvnrepository.com/artifact/io.github.humbleui/skija-android-arm64) |
+| Windows (x64) | `behemiron-skija-windows-x64` | [![](https://img.shields.io/maven-central/v/com.behemiron.engine/behemiron-skija-windows-x64)](https://mvnrepository.com/artifact/com.behemiron.engine/behemiron-skija-windows-x64) |
+| Linux (x64)   | `behemiron-skija-linux-x64`   | [![](https://img.shields.io/maven-central/v/com.behemiron.engine/behemiron-skija-linux-x64)](https://mvnrepository.com/artifact/com.behemiron.engine/behemiron-skija-linux-x64)     |
+| Linux (arm64)   | `behemiron-skija-linux-arm64`   | [![](https://img.shields.io/maven-central/v/com.behemiron.engine/behemiron-skija-linux-arm64)](https://mvnrepository.com/artifact/com.behemiron.engine/behemiron-skija-linux-arm64)     |
+| macOS (x64)   | `behemiron-skija-macos-x64`   | [![](https://img.shields.io/maven-central/v/com.behemiron.engine/behemiron-skija-macos-x64)](https://mvnrepository.com/artifact/com.behemiron.engine/behemiron-skija-macos-x64)     |
+| macOS (arm64) | `behemiron-skija-macos-arm64` | [![](https://img.shields.io/maven-central/v/com.behemiron.engine/behemiron-skija-macos-arm64)](https://mvnrepository.com/artifact/com.behemiron.engine/behemiron-skija-macos-arm64) |
+| Android (x64)   | `behemiron-skija-android-x64`   | [![](https://img.shields.io/maven-central/v/com.behemiron.engine/behemiron-skija-android-x64)](https://mvnrepository.com/artifact/com.behemiron.engine/behemiron-skija-android-x64)     |
+| Android (arm64) | `behemiron-skija-android-arm64` | [![](https://img.shields.io/maven-central/v/com.behemiron.engine/behemiron-skija-android-arm64)](https://mvnrepository.com/artifact/com.behemiron.engine/behemiron-skija-android-arm64) |
 
 For simplicity or if your build system is not smart enough to select artifact based on OS, you can add all you need as dependencies—they will not conflict.
 

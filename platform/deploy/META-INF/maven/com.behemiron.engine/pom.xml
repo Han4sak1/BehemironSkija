@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.humbleui</groupId>
+    <groupId>com.behemiron.engine</groupId>
     <artifactId>${artifact}</artifactId>
     <version>${version}</version>
     <packaging>jar</packaging>
 
-    <name>io.github.humbleui:${artifact}</name>
-    <description>Java bindings for Skia</description>
-    <url>https://github.com/humbleui/skija</url>
+    <name>Behemiron Skija ${artifact}</name>
+    <description>Behemiron-maintained Java bindings for Skia based on HumbleUI Skija</description>
+    <url>https://github.com/Han4sak1/BehemironSkija</url>
     
     <licenses>
       <license>
@@ -27,9 +27,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/humbleui/skija.git</connection>
-        <developerConnection>scm:git:ssh://github.com/humbleui/skija.git</developerConnection>
-        <url>http://github.com/humbleui/skija/tree/master</url>
+        <connection>scm:git:git://github.com/Han4sak1/BehemironSkija.git</connection>
+        <developerConnection>scm:git:ssh://github.com/Han4sak1/BehemironSkija.git</developerConnection>
+        <url>https://github.com/Han4sak1/BehemironSkija/tree/master</url>
     </scm>
 
     <properties>
@@ -40,8 +40,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.humbleui</groupId>
-            <artifactId>skija-shared</artifactId>
+            <groupId>com.behemiron.engine</groupId>
+            <artifactId>behemiron-skija-shared</artifactId>
             <version>${version}</version>
         </dependency>
     </dependencies>

@@ -41,7 +41,7 @@ jobs:
       - uses: actions/upload-artifact@v6
         with:
           name: macos-x64-jars
-          path: target/skija-macos-x64-*
+          path: target/behemiron-skija-macos-x64-*
       # arm64
       - run: python3 script/clean.py
       - run: python3 script/build.py --arch arm64
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/upload-artifact@v6
         with:
           name: macos-arm64-jars
-          path: target/skija-macos-arm64-*
+          path: target/behemiron-skija-macos-arm64-*
 
   build_linux:
     runs-on: ubuntu-22.04
@@ -71,13 +71,13 @@ jobs:
       - uses: actions/upload-artifact@v6
         with:
           name: shared-jars
-          path: target/skija-shared-*.jar
+          path: target/behemiron-skija-shared-*.jar
       - run: python3 script/test.py
       - run: python3 script/package_platform.py
       - uses: actions/upload-artifact@v6
         with:
           name: linux-x64-jars
-          path: target/skija-linux-x64-*
+          path: target/behemiron-skija-linux-x64-*
       # arm64
       - run: python3 script/clean.py
       - run: python3 script/build.py --arch arm64
@@ -85,7 +85,7 @@ jobs:
       - uses: actions/upload-artifact@v6
         with:
           name: linux-arm64-jars
-          path: target/skija-linux-arm64-*
+          path: target/behemiron-skija-linux-arm64-*
 
   build_android:
     runs-on: ubuntu-22.04
@@ -114,7 +114,7 @@ jobs:
       - uses: actions/upload-artifact@v6
         with:
           name: android-${{ matrix.arch }}-jars
-          path: target/skija-android-${{ matrix.arch }}-*
+          path: target/behemiron-skija-android-${{ matrix.arch }}-*
 
   build_windows:
     strategy:
@@ -144,7 +144,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           name: windows-${{ env.os_arch }}-jars
-          path: target/skija-windows-${{ env.os_arch }}-*
+          path: target/behemiron-skija-windows-${{ env.os_arch }}-*
 
   release:
     if: startsWith(github.ref, 'refs/tags/')
@@ -200,14 +200,14 @@ jobs:
           SONATYPE_BEARER_TOKEN: ${{ secrets.SONATYPE_BEARER_TOKEN }}
       - name: Delete useless jars
         run: |
-          rm target/skija-macos-*-sources.jar
-          rm target/skija-macos-*-javadoc.jar
-          rm target/skija-linux-*-sources.jar
-          rm target/skija-linux-*-javadoc.jar
-          rm target/skija-android-*-sources.jar
-          rm target/skija-android-*-javadoc.jar
-          rm target/skija-windows-*-sources.jar
-          rm target/skija-windows-*-javadoc.jar
+          rm target/behemiron-skija-macos-*-sources.jar
+          rm target/behemiron-skija-macos-*-javadoc.jar
+          rm target/behemiron-skija-linux-*-sources.jar
+          rm target/behemiron-skija-linux-*-javadoc.jar
+          rm target/behemiron-skija-android-*-sources.jar
+          rm target/behemiron-skija-android-*-javadoc.jar
+          rm target/behemiron-skija-windows-*-sources.jar
+          rm target/behemiron-skija-windows-*-javadoc.jar
       - uses: softprops/action-gh-release@v2
         with:
           body_path: RELEASE_NOTES.md

@@ -5,6 +5,10 @@ basedir = os.path.abspath(os.path.dirname(__file__) + '/..')
 
 classifier = build_utils.system + '-' + build_utils.arch
 module = 'io.github.humbleui.skija.' + build_utils.system + '.' + build_utils.arch
+maven_group = 'com.behemiron.engine'
+shared_artifact = 'behemiron-skija-shared'
+platform_artifact_prefix = 'behemiron-skija'
+platform_artifact = platform_artifact_prefix + '-' + classifier
 
 runtime_deps = [
   {'group': 'io.github.humbleui', 'name': 'types', 'version': '0.2.0'},

@@ -3,19 +3,19 @@ import build_utils, common, os, sys, zipfile
 
 def package():
   os.chdir(common.basedir)
-  artifact = f'skija-{common.classifier}'
+  artifact = common.platform_artifact
 
   platform_target = f'platform/target/{common.classifier}'
 
   build_utils.copy_replace(
-    'platform/deploy/META-INF/maven/io.github.humbleui/pom.xml',
-    f'{platform_target}/maven/META-INF/maven/io.github.humbleui/{artifact}/pom.xml',
+    f'platform/deploy/META-INF/maven/{common.maven_group}/pom.xml',
+    f'{platform_target}/maven/META-INF/maven/{common.maven_group}/{artifact}/pom.xml',
     {'${version}': common.version, '${artifact}': artifact}
   )
 
   build_utils.copy_replace(
-    'platform/deploy/META-INF/maven/io.github.humbleui/pom.properties',
-    f'platform/target/{common.classifier}/maven/META-INF/maven/io.github.humbleui/{artifact}/pom.properties',
+    f'platform/deploy/META-INF/maven/{common.maven_group}/pom.properties',
+    f'platform/target/{common.classifier}/maven/META-INF/maven/{common.maven_group}/{artifact}/pom.properties',
     {'${version}': common.version, '${artifact}': artifact}
   )
 
