@@ -61,7 +61,7 @@ extern "C" JNIEXPORT jlong JNICALL Java_io_github_humbleui_skija_BackendRenderTa
 
 extern "C" JNIEXPORT jlong JNICALL Java_io_github_humbleui_skija_BackendRenderTarget__1nMakeVulkan
   (JNIEnv* env, jclass jclass, jint width, jint height, jlong imagePtr, jint imageTiling, jint imageLayout, jint format, jint imageUsageFlags, jint sampleCnt, jint levelCnt) {
-    GrVkImageInfo vkInfo;
+    GrVkImageInfo vkInfo = {};
     vkInfo.fImage = reinterpret_cast<VkImage>(static_cast<uintptr_t>(imagePtr));
     vkInfo.fAlloc.fMemory = VK_NULL_HANDLE;
     vkInfo.fAlloc.fOffset = 0;
@@ -74,6 +74,36 @@ extern "C" JNIEXPORT jlong JNICALL Java_io_github_humbleui_skija_BackendRenderTa
     vkInfo.fImageUsageFlags = static_cast<VkImageUsageFlags>(imageUsageFlags);
     vkInfo.fSampleCount = static_cast<uint32_t>(sampleCnt);
     vkInfo.fLevelCount = static_cast<uint32_t>(levelCnt);
+
+    GrBackendRenderTarget target = GrBackendRenderTargets::MakeVk(width, height, vkInfo);
+    if (!target.isValid()) {
+        printf("MakeVk returned invalid target\n");
+    }
+    GrBackendRenderTarget* instance = new GrBackendRenderTarget(target);
+    return reinterpret_cast<jlong>(instance);
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_io_github_humbleui_skija_BackendRenderTarget__1nMakeVulkanWithInfo
+  (JNIEnv* env, jclass jclass, jint width, jint height, jlong imagePtr, jlong deviceMemory, jlong memoryOffset, jlong memorySize, jint flags, jlong backendMemory, jint imageTiling, jint imageLayout, jint format, jint imageUsageFlags, jint sampleCount, jint levelCount, jint currentQueueFamily, jboolean isProtected, jint sharingMode, jboolean partOfSwapchainOrAndroidWindow) {
+    GrVkImageInfo vkInfo = {};
+    vkInfo.fImage = reinterpret_cast<VkImage>(static_cast<uintptr_t>(imagePtr));
+    vkInfo.fAlloc.fMemory = reinterpret_cast<VkDeviceMemory>(deviceMemory);
+    vkInfo.fAlloc.fOffset = static_cast<VkDeviceSize>(memoryOffset);
+    vkInfo.fAlloc.fSize = static_cast<VkDeviceSize>(memorySize);
+    vkInfo.fAlloc.fFlags = static_cast<uint32_t>(flags);
+    vkInfo.fAlloc.fBackendMemory = static_cast<intptr_t>(backendMemory);
+    vkInfo.fImageTiling = static_cast<VkImageTiling>(imageTiling);
+    vkInfo.fImageLayout = static_cast<VkImageLayout>(imageLayout);
+    vkInfo.fFormat = static_cast<VkFormat>(format);
+    vkInfo.fImageUsageFlags = static_cast<VkImageUsageFlags>(imageUsageFlags);
+    vkInfo.fSampleCount = static_cast<uint32_t>(sampleCount);
+    vkInfo.fLevelCount = static_cast<uint32_t>(levelCount);
+    vkInfo.fCurrentQueueFamily = static_cast<uint32_t>(currentQueueFamily);
+    vkInfo.fProtected = isProtected ? skgpu::Protected::kYes : skgpu::Protected::kNo;
+    vkInfo.fSharingMode = static_cast<VkSharingMode>(sharingMode);
+#ifdef SK_BUILD_FOR_ANDROID_FRAMEWORK
+    vkInfo.fPartOfSwapchainOrAndroidWindow = static_cast<bool>(partOfSwapchainOrAndroidWindow);
+#endif
 
     GrBackendRenderTarget target = GrBackendRenderTargets::MakeVk(width, height, vkInfo);
     if (!target.isValid()) {

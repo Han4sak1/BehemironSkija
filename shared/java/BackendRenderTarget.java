@@ -41,6 +41,31 @@ public class BackendRenderTarget extends Managed {
         return new BackendRenderTarget(_nMakeVulkan(width, height, imagePtr, imageTiling, imageLayout, format, imageUsageFlags, sampleCnt, levelCnt));
     }
 
+    @NotNull @Contract("_, _, _ -> new")
+    public static BackendRenderTarget makeVulkan(int width, int height, @NotNull VkImageInfo info) {
+        Stats.onNativeCall();
+        return new BackendRenderTarget(_nMakeVulkanWithInfo(
+            width,
+            height,
+            info.getVkImage(),
+            info.getAlloc().getMemory(),
+            info.getAlloc().getOffset(),
+            info.getAlloc().getSize(),
+            info.getAlloc().getFlags(),
+            info.getAlloc().getBackendMemory(),
+            info.getImageTiling(),
+            info.getImageLayout(),
+            info.getFormat(),
+            info.getImageUsageFlags(),
+            info.getSampleCount(),
+            info.getLevelCount(),
+            info.getCurrentQueueFamily(),
+            info.isProtected(),
+            info.getSharingMode(),
+            info.isPartOfSwapchainOrAndroidWindow())
+        );
+    }
+
     @ApiStatus.Internal
     public BackendRenderTarget(long ptr) {
         super(ptr, _FinalizerHolder.PTR);
@@ -56,5 +81,6 @@ public class BackendRenderTarget extends Managed {
     @ApiStatus.Internal public static native long _nMakeMetal(int width, int height, long texturePtr);
     @ApiStatus.Internal public static native long _nMakeDirect3D(int width, int height, long texturePtr, int format, int sampleCnt, int levelCnt);
     @ApiStatus.Internal public static native long _nMakeVulkan(int width, int height, long imagePtr, int imageTiling, int imageLayout, int format, int imageUsageFlags, int sampleCnt, int levelCnt);
+    @ApiStatus.Internal public static native long _nMakeVulkanWithInfo(int width, int height, long imagePtr, long deviceMemory, long memoryOffset, long memorySize, int flags, long backendMemory, int imageTiling, int imageLayout, int format, int imageUsageFlags, int sampleCount, int levelCount, int currentQueueFamily, boolean isProtected, int sharingMode, boolean partOfSwapchainOrAndroidWindow);
 
 }
